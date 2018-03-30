@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    #div1{
+        width: 400px;
+        height: 400px;
+        background: rgb(219, 11, 11);
+    }
+    #div2{
+        width: 200px;
+        height: 200px;
+        background:green;
+    }
+</style>
+<body>
+    <div id="app">
+        <!-- v-on 简写成@ -->
+        <button @click.once="clickhander(2,$event)">btn</button>
+        <h1 v-text="num"></h1>
+        <button v-on="{ mousedown: doThis, mouseup: doThat}">btn2</button>
+    
+        
+
+        <div id="div1" @click="clickdiv1">
+            <div id="div2" @click.stop="clickdiv2($event)">
+            </div>
+        </div>
+
+
+        <a href="http://www.baidu.com" @click.prevent="baiduClick($event)">百度</a>
+        <input type="text" @keyup.13="keyupHandler($event)">
+   
+   
+   
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                num: 0
+            },
+            methods: {
+                clickhander(n,e) {
+                    this.num += n;
+                    console.log(e)
+                },
+                doThis(){
+                    console.log("doTHis")
+                },
+                doThat(){
+                    console.log("doThat")
+                },
+                clickdiv1(){
+                    alert("div1");
+                    
+                },
+                clickdiv2(e){
+                    alert("div2");
+                    // e.stopPropagation()
+                },
+                baiduClick(e){
+                    // return false;
+                    // e.preventDefault();
+                },
+                keyupHandler(e){
+                    // if(e.KeyCode == 13){
+                        console.log(123);
+                    // }
+                }
+
+                
+            }
+        });
+    </script>
+</body>
+
+</html>
