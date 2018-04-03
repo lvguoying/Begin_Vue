@@ -1,24 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+<style>
+    .red {
+        background: #ff00ff;
+    }
+</style>
+
 <body>
     <div id="app">
-        
+        <h1>TODOLIST</h1>
+        <hr>
+        <table>
+            <thead>
+                <tr>
+                    <td>选择</td>
+                    <td>商品名称</td>
+                    <td>商品价格</td>
+                    <td>删除</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="product in producList" @click="select(product)" :class="{red:product.isSelected}">
+                    <td>
+                        <input type="checkbox">
+                    </td>
+                    <td>{{product.name}}</td>
+                    <td>{{product.price}}</td>
+                    <td>删除</td>
+                </tr>
+                <tr>
+                    <td>
+                        <button>删除选中</button>
+                    </td>
+                    <td colspan="3">
+                        总价：{{(sum)}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
     <script src="vue.js"></script>
     <script>
         new Vue({
-            el:'#app',
-            data: ""
+            el: '#app',
+            data: {
+                producList: [
+                    {
+                        name: '衣服 ',
+                        price: 123,
+                        isSelected: false,
+                    }, {
+                        name: '裤子 ',
+                        price: 456,
+                        isSelected: false,
+                    }, {
+                        name: '鞋 ',
+                        price: 444,
+                        isSelected: false,
+                    }, {
+                        name: '帽子 ',
+                        price: 666,
+                        isSelected: false,
+                    }, {
+                        name: '手套 ',
+                        price: 888,
+                        isSelected: false,
+                    }, {
+                        sum: 0
+                    }
 
-        })
-    
-    
+                ],
+            },
+            methods: {
+                select(product) {
+                    product.isSelected = !product.isSelected;
+                },
+                getSum() {
+                    this.sum = 0;
+                    this.producList.forEach((iten, index) => {
+                        if (item.isSelected) {
+                            this.sum += item.price;
+                        }
+                        return thsi.sum
+                    });
+                }
+            }
+        });
     </script>
 </body>
+
 </html>
