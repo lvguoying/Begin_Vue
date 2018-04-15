@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-
+    <script src="../jquery.js"></script>
+    
     <style>
         * {
             margin: 0;
@@ -16,21 +17,19 @@
         li {
             list-style: none;
         }
-      
+
         #app {
-            width: 600px;
+            width: 400px;
             margin: 100px auto;
         }
 
         #app h1 {
             text-align: center;
-            border: 2px solid #ffffff;
-            border-radius: 20px;
         }
 
         #list li {
             height: 50px;
-            background: #367ce46b;
+            background: #cccccc;
             margin-top: 10px;
             line-height: 50px;
             padding: 0 10px;
@@ -66,7 +65,7 @@
     <div id="app">
         <h1>todolist</h1>
         <hr>
-        <div class="table-condensed">
+        <div>
             <label>名称:
                 <input type="text" v-model="name" placeholder="请输入产品名称">
             </label>
@@ -75,54 +74,55 @@
             </label>
             <button @click="add">增加</button>
         </div>
-        <div>
             <input type="text" placeholder="请输入搜索关键字" v-model="keyword">
+        <div>
             <button @click="search">查询</button>
         </div>
 
 
-        <ul id="list">
-            <li v-for="(product, index) in productList" @click="select(product)" :class="{red:product.isRed}">
+        <table id="list" class="table-bordered">
+            <tr v-for="(product, index) in productList" @click="select(product)" :class="{red:product.isRed}">
                 <input type="checkbox" @click.stop="" v-model="checked" :value="index">
-                <span class="del" @click.stop="del(index)">[X]</span>
-                <span class="product-name">{{product.name}}</span>
-                <span class="product-price">{{product.price}}</span>
-            </li>
-        </ul>
+                <td class="del" @click.stop="del(index)">[X]</td>
+                <td class="product-name">{{product.name}}</td>
+                <td class="product-price">{{product.price}}</td>
+            </tr>
+        </table>
         <div id="total">
             <button @click="delAll">删除选中</button>
             总价： {{sum()}}
         </div>
 
     </div>
+
+
+
     <script src="vue.js"></script>
     <script>
         new Vue({
             el: '#app',
             data: {
-                productList: [
-                    {
-                        name: '衣服',
-                        price: '123',
-                        isRed: false
-                    }, {
-                        name: '裤子',
-                        price: '564',
-                        isRed: false
-                    }, {
-                        name: '鞋',
-                        price: '66',
-                        isRed: false
-                    }, {
-                        name: 'iphoneX',
-                        price: '8888',
-                        isRed: false
-                    }, {
-                        name: '电脑',
-                        price: '986',
-                        isRed: false
-                    }
-                ],
+                productList: [{
+                    name: '衣服',
+                    price: '123',
+                    isRed: false
+                }, {
+                    name: '裤子',
+                    price: '564',
+                    isRed: false
+                }, {
+                    name: '鞋',
+                    price: '66',
+                    isRed: false
+                }, {
+                    name: 'iphoneX',
+                    price: '8888',
+                    isRed: false
+                }, {
+                    name: '电脑',
+                    price: '986',
+                    isRed: false
+                }],
                 total: 0,
                 name: '',
                 price: 0,
@@ -184,9 +184,13 @@
                 }
             }
         });
+        $('#app').css= {
+            "background":"red"
+        }
     </script>
-    <!-- <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css"> -->
-    <!-- <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script> -->
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    
 </body>
 
 </html>
